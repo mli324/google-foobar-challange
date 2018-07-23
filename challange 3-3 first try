@@ -1,0 +1,23 @@
+package com.google.challenges; 
+
+public class Answer {   
+    public static int answer(int start, int length) { 
+
+        // Your code goes here.
+        long[] id = new long[length];
+        long checksum = 0;
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < length; j++) {
+                id[j] = start + i * length + j;
+                if(j+1> length - i) {
+                    id[j] = 0;
+                }
+                checksum = checksum ^ id[j];
+            }
+        }
+        return (int)checksum;
+
+    } 
+}
+
+result: execution takes too long
