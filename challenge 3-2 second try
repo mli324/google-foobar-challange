@@ -39,7 +39,7 @@ of the array will be the same as the number it represent;
 public class Answer {   
     public static int[][] storage = new int[201][201];
     public static void makeArray(int[][] storage) {
-        for (int i = 1; i < storage.length;i++){
+        for (int i = 0; i < storage.length;i++){
             for(int j = 1; j <storage[i].length;j++) {
                 if (j > i + 1) {
                     storage[i][j] = storage[i][j - 1];
