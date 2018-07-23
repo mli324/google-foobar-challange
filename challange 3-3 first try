@@ -1,3 +1,5 @@
+It seems to be an easy to code question using bruteforce of time space o(n^2), n is the length input.
+
 package com.google.challenges; 
 
 public class Answer {   
