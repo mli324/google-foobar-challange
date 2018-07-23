@@ -1,0 +1,61 @@
+thoughts: Since the bruteforce method exceed the time limit, the new method must use some feature of the xor operation as shortcut.
+    The calculation included a lot of xor manipulation of consecutive numbers. There should be an easier way to calculate the xor of
+a list of consecutive numbers.
+
+The function f(n) calculating xor of a list of integers 0 to n has result as follows:
+switch(n%4) {
+    case 0:
+      f(n) = n;
+    case 1:
+      f(n) = 1;
+    case 2:
+      f(n) = n + 1;
+    case 3:
+      f(n) = 0;
+}
+For Xor of a consecutive list from a to b, since a ^ a = 0, f(a-1)^f(b) should balance out the 0 to a-1 XOR execution not wanted in
+f(b) and be the right answer. Therefore, we can write a function calculating the Xor of 0-n using the above f(n) and do the xor of
+any row easily with f(a-1) ^ f(b). We can then do the xor between rows to get the answer.
+
+package com.google.challenges; 
+
+public class Answer {   
+    public static int answer(int start, int length) { 
+
+        // Your code goes here.
+        if(length == 1) {
+            return start;
+        }
+        int consecutive = 0;
+        int fa = 0;
+        int fb = 0;
+        int checksum = 0;
+        int s = start;
+        for (int i = 0; i < length; i++) {
+                s = start + i * length;
+                fa = consecutiveSum(s - 1);
+                fb = consecutiveSum(s + length - i - 1);
+                checksum = checksum ^ (fa ^ fb);
+        }
+        return checksum;
+
+    } 
+    public static int consecutiveSum(int a) {
+        int fa = 0;
+        switch (a%4) {
+            case 0:
+                fa =  a;
+                break;
+            case 1:
+                fa = 1;
+                break;
+            case 2:
+                fa = a + 1;
+                break;
+            case 3:
+                fa = 0;
+                break;
+        }
+        return fa;
+    }
+}
